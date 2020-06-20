@@ -3,4 +3,4 @@
 # This configuration is useful for first tests and benchmarks.
 source =REPO_DIR=/scripts/common.sh
 
-docker-compose -f $REPO_HOME/services.yml up -d
+docker-compose -f $REPO_HOME/services.yml down -v

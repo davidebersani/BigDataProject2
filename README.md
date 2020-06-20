@@ -9,5 +9,7 @@ Run the following commands.
 ```
 wget <address>
 cd <dir>
+mkdir scripts
 ./init-project.sh
 ```
+Afther this, you can download YCSB using the script download-ycsb.sh
