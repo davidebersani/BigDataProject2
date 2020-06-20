@@ -12,4 +12,4 @@ cd <dir>
 mkdir scripts
 ./init-project.sh
 ```
-Afther this, you can download YCSB using the script download-ycsb.sh
+Afther this, you can download YCSB using the script download-ycsb.sh. Then, you're ready to benchmark!
