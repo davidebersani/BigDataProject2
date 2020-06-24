@@ -7,8 +7,8 @@ Run the following commands.
 
 **N.B. The path to the directory where you download the repo can't contain spaces.**
 ```
-wget <address>
-cd <dir>
+git clone https://github.com/davidebersani/BigDataProject2.git
+cd BigDataProject2
 ./init-project.sh
 ```
-Afther this, you can download YCSB using the script download-ycsb.sh. Then, you're ready to benchmark!
+Afther this, you can download YCSB using the script ```download-ycsb.sh``` . Then, you're ready to benchmark!
