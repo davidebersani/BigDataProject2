@@ -48,4 +48,7 @@ def generateAndShowInputLatencyPlots(input_dim, throughputs, source) :
         plt.legend()
         
         # function to show the plot 
-        plt.show() 
+        plt.show()
+        
+        #function for save result plt.show in file
+        #plt.savefig('result.png')
