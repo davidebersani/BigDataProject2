@@ -6,7 +6,7 @@ REPO_HOME="=REPO_DIR="
 HOME_YCSB="=REPO_DIR=/ycsb-0.17.0"
 BIN_YCSB=HOME_YCSB + "/bin"
 SCRIPTS="=REPO_DIR=/scripts"
-host = "http://localhost:27017"
+mongodb_connection_string = "mongodb://localhost:27017/ycsb?w=1"
 output_dir="=REPO_DIR=/scripts/test-mongo-scenarioA"
 
 def getOutputFilename(operation, dim, t) :
@@ -34,11 +34,11 @@ def delete_db() :
 def laod_data(dim) :
     # Execute workload a for every dim
     print("\n\n==> Loading data: " + str(dim) + " record")
-    command = BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " > " + getOutputFilename("Load", dim, None)
+    command = BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -p mongodb.url=" + mongodb_connection_string + " > " + getOutputFilename("Load", dim, None)
     execute(command)
 
 def run_workload(dim, t) :
-    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -target " + str(t) + " > " + getOutputFilename("Run", dim, t)
+    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -target " + str(t) + " -p mongodb.url=" + mongodb_connection_string + " > " + getOutputFilename("Run", dim, t)
     execute(command)
 
 # Every record is 1KB (10 fields of 100B)
