@@ -56,3 +56,4 @@ for dim in input_dim:
     delete_db()
 
 plots.generateAndShowInputLatencyPlots(input_dim, throughput, "test-mongo-scenarioA")
+plots.generateAndShowThroughputLatencyPlots(input_dim, throughput, "test-mongo-scenarioA")
