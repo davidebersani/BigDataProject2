@@ -9,8 +9,16 @@ SCRIPTS="=REPO_DIR=/scripts"
 host = "http://localhost:27017"
 output_dir="=REPO_DIR=/scripts/test-mongo-scenarioA"
 
-def getOutputFilename(operation) :
-    return output_dir + "/output-" + operation + "-dim" + str(dim) + "-throughput" + str(t) + ".txt"
+def getOutputFilename(operation, dim, t) :
+    filename = output_dir + "/output-" + operation
+    if dim is not None:
+        filename = filename + "-dim" + str(dim)
+
+    if t is not None:
+        filename = filename + "-throughput" + str(t)
+
+    filename = filename + ".txt"
+    return filename
 
 def execute(command) :
     command = "sh -c \"" + command + "\""
@@ -25,13 +33,12 @@ def delete_db() :
 
 def laod_data(dim) :
     # Execute workload a for every dim
-    print("\n\n==> Loading data")
-    command = BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " > " + getOutputFilename("Load")
+    print("\n\n==> Loading data: " + str(dim) + " record")
+    command = BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " > " + getOutputFilename("Load", dim, None)
     execute(command)
 
 def run_workload(dim, t) :
-    print("\n\n==> Executing workload with input dim " + str(dim) + " and throughput " + str(t))
-    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -target " + str(t) + " > " + getOutputFilename("Run")
+    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -target " + str(t) + " > " + getOutputFilename("Run", dim, t)
     execute(command)
 
 # Every record is 1KB (10 fields of 100B)
@@ -40,10 +47,12 @@ throughput = [100, 1000, 100000]
 #clients=[]
 
 for dim in input_dim:
+    laod_data(dim)
     for t in throughput:
         print("\n==> Wordload A. Input dim: " + str(dim) + "; Throughput: " + str(t))
         laod_data(dim)
         run_workload(dim, t)
-        delete_db()
+    
+    delete_db()
 
 plots.generateAndShowInputLatencyPlots(input_dim, throughput, "test-mongo-scenarioA")
