@@ -1,0 +1,4 @@
+db.driver=org.postgresql.Driver
+db.url=jdbc:postgresql://127.0.0.1:5432/ycsb
+db.user=postgres
+db.passwd=postgres

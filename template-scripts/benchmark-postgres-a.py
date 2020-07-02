@@ -4,8 +4,8 @@ import plots
 import sys
 import commons
 
-mongodb_connection_string = "mongodb://localhost:27017/ycsb?w=1"
-output_dir="=REPO_DIR=/scripts/test-mongo-scenarioA"
+postgres_connection_string = "jdbc:postgresql://127.0.0.1:5432/ycsb"
+output_dir="=REPO_DIR=/scripts/test-postgres-scenarioA"
 
 def execute(command) :
     command = "sh -c \"" + command + "\""
@@ -15,25 +15,22 @@ def execute(command) :
 
 def delete_db(usage) :
     print("\n\n==> Removing db")
-    if usage=="local-docker":
-        command = "docker exec -it mongo mongo ycsb --eval \\\"db.dropDatabase()\\\""
-        execute(command)
-    elif usage=="local":
-            command = "mongo ycsb --eval \\\"db.dropDatabase()\\\""
-            execute(command)
-    else:
-        print("Please, manually delete the db. This function is still not supported.")
-        input()
+    # if usage=="local":
+    #     command = "mongo ycsb --eval \\\"db.dropDatabase()\\\""
+    #     execute(command)
+    # else:
+    print("Please, manually delete the db. This function is still not supported.")
+    input()
     
 
 def laod_data(dim) :
     # Execute workload a for every dim
     print("\n\n==> Loading data: " + str(dim) + " record")
-    command = commons.BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + commons.HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -p mongodb.url=" + mongodb_connection_string + " > " + commons.getOutputFilename(output_dir, "Load", dim, None, None)
+    command = commons.BIN_YCSB + "/ycsb.sh load jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/prop -p recordcount=" + str(dim) + " -p db.url=" + postgres_connection_string + " > " + commons.getOutputFilename(output_dir, "Load", dim, None, None)
     execute(command)
 
 def run_workload(dim, t, c, op) :
-    command = commons.BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + commons.HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p mongodb.url=" + mongodb_connection_string + " -p operationcount=" + str(op) + " > " + commons.getOutputFilename(output_dir, "Run", dim, t, c)
+    command = commons.BIN_YCSB + "/ycsb.sh run jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/prop -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p db.url=" + postgres_connection_string + " -p operationcount=" + str(op) + " > " + commons.getOutputFilename(output_dir, "Run", dim, t, c)
     execute(command)
 
 
@@ -50,6 +47,8 @@ throughput = [1000, 100000, 1000000]
 clients=[10]
 operationcount=100000 # Number of operation per thread
 
+
+print("==> Before running create the table! See https://github.com/brianfrankcooper/YCSB/tree/master/jdbc")
 for num_clients in clients:  
     for dim in input_dim:
         laod_data(dim)
@@ -61,5 +60,5 @@ for num_clients in clients:
 
 # PROSSIMI PASSI: AGGIUNGERE ITERAZIONE SUI CLIENT.
 
-# plots.generateAndShowInputLatencyPlots(input_dim, throughput, clients, "test-mongo-scenarioA")
-# plots.generateAndShowThroughputLatencyPlots(input_dim, throughput, clients, "test-mongo-scenarioA")
+# plots.generateAndShowInputLatencyPlots(input_dim, throughput, clients, "test-postgres-scenarioA")
+# plots.generateAndShowThroughputLatencyPlots(input_dim, throughput, clients, "test-postgres-scenarioA")
