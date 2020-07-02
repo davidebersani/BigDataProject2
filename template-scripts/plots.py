@@ -44,7 +44,7 @@ def generateAndShowInputLatencyPlots(input_dim, throughputs, source) :
         plt.ylabel('Average latency (us)') 
         
         # giving a title to my graph 
-        plt.title('Input dimention / latency with Throughput=' + str(t)) 
+        plt.title('Input dimension / latency with Throughput=' + str(t)) 
         plt.legend()
         
         # function to show the plot 
