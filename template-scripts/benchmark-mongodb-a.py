@@ -29,9 +29,12 @@ def execute(command) :
 
 def delete_db(usage) :
     print("\n\n==> Removing db")
-    if usage=="local":
+    if usage=="local-docker":
         command = "docker exec -it mongo mongo ycsb --eval \\\"db.dropDatabase()\\\""
         execute(command)
+    elif usage=="local":
+            command = "mongo ycsb --eval \\\"db.dropDatabase()\\\""
+            execute(command)
     else:
         print("Please, manually delete the db. This function is still not supported.")
         input()
@@ -50,7 +53,7 @@ def run_workload(dim, t) :
 
 if len(sys.argv)<2 :
     print("Error, required parameter: ")
-    print("- Usage: local or remote")
+    print("- Usage: local or remote or local-docker")
     print("Usage: py benchmark-mongodb-a.py <usage>")
     exit(1)
 
