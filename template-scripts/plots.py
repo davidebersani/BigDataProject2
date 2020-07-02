@@ -98,7 +98,7 @@ def generateAndShowThroughputLatencyPlots(input_dim, throughputs, clients, sourc
             plt.ylabel('Average latency (us)') 
             
             # giving a title to my graph 
-            plt.title('Thrpughput / latency curve with Input dimension=' + str(t) + " and " + str(c) + " clients") 
+            plt.title('Thrpughput / latency curve with Input dimension=' + str(dim) + " and " + str(c) + " clients") 
             plt.legend()
             
             # function to show the plot 

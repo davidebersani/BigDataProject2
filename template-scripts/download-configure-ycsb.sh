@@ -6,3 +6,5 @@ curl -O --location https://github.com/brianfrankcooper/YCSB/releases/download/0.
 echo "==> Extracting..."
 tar xfvz ycsb-0.17.0.tar.gz --directory $REPO_HOME
 rm -r ycsb-0.17.0.tar.gz
+curl -O --location https://jdbc.postgresql.org/download/postgresql-42.2.14.jar
+mv postgresql-42.2.14.jar $HOME_YCSB/jdbc-binding/lib/
