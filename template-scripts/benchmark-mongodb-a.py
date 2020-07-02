@@ -49,8 +49,8 @@ def laod_data(dim) :
     command = BIN_YCSB + "/ycsb.sh load mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -p mongodb.url=" + mongodb_connection_string + " > " + getOutputFilename("Load", dim, None, None)
     execute(command)
 
-def run_workload(dim, t, c) :
-    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p mongodb.url=" + mongodb_connection_string + " > " + getOutputFilename("Run", dim, t, c)
+def run_workload(dim, t, c, op) :
+    command = BIN_YCSB + "/ycsb.sh run mongodb-async -s -P " + HOME_YCSB + "/workloads/workloada -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p mongodb.url=" + mongodb_connection_string + " -p operationcount=" + str(op) + " > " + getOutputFilename("Run", dim, t, c)
     execute(command)
 
 
@@ -65,13 +65,14 @@ if len(sys.argv)<2 :
 input_dim = [100000, 500000, 1000000, 3000000, 5000000]
 throughput = [1000, 100000, 1000000]
 clients=[10]
+operationcount=3000000 # Number of operation per thread
 
 for num_clients in clients:  
     for dim in input_dim:
         laod_data(dim)
         for t in throughput:
             print("\n==> Wordload A. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
-            run_workload(dim, t, num_clients)
+            run_workload(dim, t, num_clients, operationcount)
         
         delete_db(sys.argv[1])
 
