@@ -1,0 +1,3 @@
+Mongodb in cloud.
+
+We tried Mongodb in cloud using an ec2 instance (m5.xlarge), AMI: Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type.
