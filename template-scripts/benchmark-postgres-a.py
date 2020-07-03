@@ -37,7 +37,7 @@ def run_workload(dim, t, c, op) :
 if len(sys.argv)<2 :
     print("Error, required parameter: ")
     print("- Usage: local or remote or local-docker")
-    print("Usage: py benchmark-mongodb-a.py <usage>")
+    print("Usage: py benchmark-postgres-a.py <usage>")
     exit(1)
 
 
