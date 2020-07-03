@@ -1,6 +1,5 @@
 # Script for execute workload A on Mongodb with various parameters.
 import subprocess
-import plots
 import sys
 import commons
 
@@ -19,18 +18,17 @@ def delete_db(usage) :
     #     command = "mongo ycsb --eval \\\"db.dropDatabase()\\\""
     #     execute(command)
     # else:
-    print("Please, manually delete the db. This function is still not supported.")
+    print("Please, manually delete the db. This function is still not supported. Afther done, press Enter")
     input()
-    
 
 def laod_data(dim) :
     # Execute workload a for every dim
     print("\n\n==> Loading data: " + str(dim) + " record")
-    command = commons.BIN_YCSB + "/ycsb.sh load jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/prop -p recordcount=" + str(dim) + " -p db.url=" + postgres_connection_string + " > " + commons.getOutputFilename(output_dir, "Load", dim, None, None)
+    command = commons.BIN_YCSB + "/ycsb.sh load jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/postgres-prop -p recordcount=" + str(dim) + " -p db.url=" + postgres_connection_string + " > " + commons.getOutputFilename(output_dir, "Load", dim, None, None)
     execute(command)
 
 def run_workload(dim, t, c, op) :
-    command = commons.BIN_YCSB + "/ycsb.sh run jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/prop -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p db.url=" + postgres_connection_string + " -p operationcount=" + str(op) + " > " + commons.getOutputFilename(output_dir, "Run", dim, t, c)
+    command = commons.BIN_YCSB + "/ycsb.sh run jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/postgres-prop -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p db.url=" + postgres_connection_string + " -p operationcount=" + str(op) + " > " + commons.getOutputFilename(output_dir, "Run", dim, t, c)
     execute(command)
 
 
@@ -59,6 +57,3 @@ for num_clients in clients:
         delete_db(sys.argv[1])
 
 # PROSSIMI PASSI: AGGIUNGERE ITERAZIONE SUI CLIENT.
-
-# plots.generateAndShowInputLatencyPlots(input_dim, throughput, clients, "test-postgres-scenarioA")
-# plots.generateAndShowThroughputLatencyPlots(input_dim, throughput, clients, "test-postgres-scenarioA")

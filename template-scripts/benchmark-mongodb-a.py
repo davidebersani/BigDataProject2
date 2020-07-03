@@ -1,6 +1,5 @@
 # Script for execute workload A on Mongodb with various parameters.
 import subprocess
-import plots
 import sys
 import commons
 
@@ -22,7 +21,7 @@ def delete_db(usage) :
             command = "mongo ycsb --eval \\\"db.dropDatabase()\\\""
             execute(command)
     else:
-        print("Please, manually delete the db. This function is still not supported.")
+        print("Please, manually delete the db. This function is still not supported. Afther done, press Enter")
         input()
     
 
@@ -60,6 +59,3 @@ for num_clients in clients:
         delete_db(sys.argv[1])
 
 # PROSSIMI PASSI: AGGIUNGERE ITERAZIONE SUI CLIENT.
-
-# plots.generateAndShowInputLatencyPlots(input_dim, throughput, clients, "test-mongo-scenarioA")
-# plots.generateAndShowThroughputLatencyPlots(input_dim, throughput, clients, "test-mongo-scenarioA")
