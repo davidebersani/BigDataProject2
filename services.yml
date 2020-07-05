@@ -11,3 +11,18 @@ services:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
+
+  # Use postgres/postgres user/password credentials
+  postgres:
+    image: postgres
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
