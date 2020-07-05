@@ -1,7 +1,17 @@
+from pathlib import Path
+import subprocess
+
 REPO_HOME="=REPO_DIR="
 HOME_YCSB="=REPO_DIR=/ycsb-0.17.0"
 BIN_YCSB=HOME_YCSB + "/bin"
 SCRIPTS="=REPO_DIR=/scripts"
+
+def executeBashCommand(command) :
+    command = "sh -c \"" + command + "\""
+    print("\n\n==> Execute: " + command)
+    process = subprocess.call(command, shell=True)
+    return process
+
 
 def getOutputFilename(base_dir, operation, dim, t, c) :
     filename = base_dir + "/output-" + operation
@@ -16,3 +26,6 @@ def getOutputFilename(base_dir, operation, dim, t, c) :
 
     filename = filename + ".txt"
     return filename
+
+def createDirIfNotExists(path) :
+    executeBashCommand("mkdir -p " + path)

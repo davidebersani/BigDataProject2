@@ -1,16 +1,9 @@
 # Script for execute workload A on Mongodb with various parameters.
-import subprocess
 import sys
 import commons
 
 postgres_connection_string = "jdbc:postgresql://127.0.0.1:5432/ycsb"
 output_dir="=REPO_DIR=/scripts/test-postgres-scenarioA"
-
-def execute(command) :
-    command = "sh -c \"" + command + "\""
-    print("\n\n==> Execute: " + command)
-    process = subprocess.call(command, shell=True)
-    return process
 
 def delete_db(usage) :
     print("\n\n==> Removing db")
@@ -25,11 +18,11 @@ def laod_data(dim) :
     # Execute workload a for every dim
     print("\n\n==> Loading data: " + str(dim) + " record")
     command = commons.BIN_YCSB + "/ycsb.sh load jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/postgres-prop -p recordcount=" + str(dim) + " -p db.url=" + postgres_connection_string + " > " + commons.getOutputFilename(output_dir, "Load", dim, None, None)
-    execute(command)
+    commons.executeBashCommand(command)
 
 def run_workload(dim, t, c, op) :
     command = commons.BIN_YCSB + "/ycsb.sh run jdbc -s -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/postgres-prop -p recordcount=" + str(dim) + " -threads " + str(c) +" -target " + str(t) + " -p db.url=" + postgres_connection_string + " -p operationcount=" + str(op) + " > " + commons.getOutputFilename(output_dir, "Run", dim, t, c)
-    execute(command)
+    commons.executeBashCommand(command)
 
 
 if len(sys.argv)<2 :
@@ -45,6 +38,7 @@ throughput = [1000, 100000, 1000000]
 clients=[10]
 operationcount=100000 # Number of operation per thread
 
+commons.createDirIfNotExists(output_dir)
 
 print("==> Before running create the table! See https://github.com/brianfrankcooper/YCSB/tree/master/jdbc")
 for num_clients in clients:  
