@@ -13,8 +13,11 @@ def executeBashCommand(command) :
     return process
 
 
-def getOutputFilename(base_dir, operation, dim, t, c) :
+def getOutputFilename(base_dir, operation, workload, dim, t, c) :
     filename = base_dir + "/output-" + operation
+    if workload is not None:
+        filename = filename + "-" + str(workload)
+
     if dim is not None:
         filename = filename + "-dim" + str(dim)
 
