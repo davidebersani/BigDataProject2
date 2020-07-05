@@ -5,6 +5,12 @@ import commons
 postgres_connection_string = "jdbc:postgresql://127.0.0.1:5432/ycsb"
 output_dir="=REPO_DIR=/scripts/test-postgres-scenarioA"
 
+# Every record is 1KB (10 fields of 100B)
+input_dim = [100000, 500000, 1000000, 3000000, 5000000]
+throughput = [1000, 100000, 1000000]
+clients=[10]
+operationcount=100000 # Number of operation per thread
+
 def delete_db(usage) :
     print("\n\n==> Removing db")
     # if usage=="local":
@@ -31,12 +37,6 @@ if len(sys.argv)<2 :
     print("Usage: py benchmark-postgres-a.py <usage>")
     exit(1)
 
-
-# Every record is 1KB (10 fields of 100B)
-input_dim = [100000, 500000, 1000000, 3000000, 5000000]
-throughput = [1000, 100000, 1000000]
-clients=[10]
-operationcount=100000 # Number of operation per thread
 
 commons.createDirIfNotExists(output_dir)
 
