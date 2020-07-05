@@ -11,6 +11,12 @@ throughput = [1000, 100000, 1000000]
 clients=[10]
 operationcount=100000 # Number of operation per thread
 
+# Every record is 1KB (10 fields of 100B)
+input_dim = [100000, 500000, 1000000, 3000000, 5000000]
+throughput = [1000, 100000, 1000000]
+clients=[10]
+operationcount=100000 # Number of operation per thread
+
 def delete_db(usage) :
     print("\n\n==> Removing db")
     # if usage=="local":
