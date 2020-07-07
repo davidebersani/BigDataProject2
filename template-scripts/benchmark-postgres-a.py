@@ -54,7 +54,7 @@ for num_clients in clients:
             print("\n==> Wordload A. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
             run_workload("workloada", dim, t, num_clients, operationcount)
             print("\n==> Wordload B. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
-            run_workload("workloada", dim, t, num_clients, operationcount)
+            run_workload("workloadb", dim, t, num_clients, operationcount)
             print("\n==> Wordload C. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
             run_workload("workloadc", dim, t, num_clients, operationcount)
             print("\n==> Wordload D. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
@@ -62,7 +62,7 @@ for num_clients in clients:
             print("\n==> Wordload E. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
             run_workload("workloade", dim, t, num_clients, operationcount)
             print("\n==> Wordload F. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
-            run_workload("workload", dim, t, num_clients, operationcount)
+            run_workload("workloadf", dim, t, num_clients, operationcount)
         
         delete_db(sys.argv[1])
 

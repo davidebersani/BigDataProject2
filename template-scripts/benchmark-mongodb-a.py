@@ -65,7 +65,7 @@ for num_clients in clients:
             print("\n==> Wordload E. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
             run_workload("workloade", dim, t, num_clients, operationcount)
             print("\n==> Wordload F. Input dim: " + str(dim) + "; Throughput: " + str(t) + "; Clients: " + str(num_clients))
-            run_workload("workload", dim, t, num_clients, operationcount)
+            run_workload("workloadf", dim, t, num_clients, operationcount)
         
         delete_db(sys.argv[1])
 
