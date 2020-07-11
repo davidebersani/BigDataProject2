@@ -1,5 +1,9 @@
 #!/bin/bash
-line=$(head -n 1 id_voltdb.txt)
-docker stop $line
-docker rm $line
+input="id_voltdb.txt"
+while IFS= read -r line
+do
+    docker stop $line
+    docker rm $line
+done < "$input"
+
 rm -r id_voltdb.txt
