@@ -14,10 +14,10 @@ operationcount=100000 # Number of operation per thread
 def delete_db(usage) :
     print("\n\n==> Removing db")
     if usage=="local-docker":
-        command = "docker exec -it voltdb voltdb ycsb --eval \\\"db.dropDatabase()\\\""
+        command = "docker exec -it node1 sqlcmd --query=\"truncate table store\""
         commons.executeBashCommand(command)
     elif usage=="local":
-            command = "votdb ycsb --eval \\\"db.dropDatabase()\\\""
+            command = "sqlcmd --query=\"truncate table store\""
             commons.executeBashCommand(command)
     else:
         print("Please, manually delete the db. This function is still not supported. Afther done, press Enter")
@@ -27,7 +27,7 @@ def delete_db(usage) :
 def laod_data(dim) :
     # Execute workload a for every dim
     print("\n\n==> Loading data: " + str(dim) + " record")
-    command = commons.BIN_YCSB + "/ycsb.sh load voltdb -P " + commons.HOME_YCSB + "/workloads/workloada -P voltdb.properties > " + commons.getOutputFilename(output_dir, "Load", None, dim, None, None)
+    command = commons.BIN_YCSB + "/ycsb.sh load voltdb -P " + commons.HOME_YCSB + "/workloads/workloada -P " + commons.SCRIPTS + "/voltdb-prop > " + commons.getOutputFilename(output_dir, "Load", None, dim, None, None)
     
     commons.executeBashCommand(command)
 
