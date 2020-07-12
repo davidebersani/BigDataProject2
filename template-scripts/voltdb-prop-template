@@ -1,0 +1,2 @@
+voltdb.servers=localhost:=VOLTDB_MAPPED_PORT=
+voltdb.scanall='yes'
