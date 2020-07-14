@@ -31,6 +31,10 @@ def laod_data(dim) :
     
     commons.executeBashCommand(command)
 
+def run_workload(workload, dim, t, c, op) :
+    command = commons.BIN_YCSB + "/ycsb.sh run voltdb -P " + commons.HOME_YCSB + "/workloads/" + workload + "-P " + commons.SCRIPTS + "/voltdb-prop > " + commons.getOutputFilename(output_dir, "Run", workload, dim, t, c)
+    commons.executeBashCommand(command)
+
 if len(sys.argv)<2 :
     print("Error, required parameter: ")
     print("- Usage: local or remote or local-docker")
@@ -40,7 +44,7 @@ if len(sys.argv)<2 :
 commons.createDirIfNotExists(output_dir)
 
 laod_data(100000)
-'''
+
 for num_clients in clients:  
     for dim in input_dim:
         laod_data(dim)
@@ -57,5 +61,3 @@ for num_clients in clients:
             run_workload("workloadf", dim, t, num_clients, operationcount)
         
         delete_db(sys.argv[1])
-
-'''
