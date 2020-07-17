@@ -32,7 +32,7 @@ def laod_data(dim) :
     commons.executeBashCommand(command)
 
 def run_workload(workload, dim, t, c, op) :
-    command = commons.BIN_YCSB + "/ycsb.sh run voltdb -P " + commons.HOME_YCSB + "/workloads/" + workload + "-P " + commons.SCRIPTS + "/voltdb-prop > " + commons.getOutputFilename(output_dir, "Run", workload, dim, t, c)
+    command = commons.BIN_YCSB + "/ycsb.sh run voltdb -P " + commons.HOME_YCSB + "/workloads/" + workload + " -P " + commons.SCRIPTS + "/voltdb-prop > " + commons.getOutputFilename(output_dir, "Run", workload, dim, t, c)
     commons.executeBashCommand(command)
 
 if len(sys.argv)<2 :
