@@ -1,7 +1,0 @@
-Voltdb in cloud.
-
-We tried Voltdb in cloud using an ec2 instance (m5.xlarge), AMI: Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type.
-
-1) start an ec2 istance
-2) use command "scp -i path/to/pem path/to/file username@PublicDNS/home/username"
-3) use command "ssh -i /path/my-key-pair.pem my-instance-user-name@my-instance-public-dns-name"
