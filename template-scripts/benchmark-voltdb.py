@@ -3,7 +3,7 @@ import sys
 import commons
 
 #voltdb_connection_string = "voltdb://127.0.0.1:21212/ycsb"
-output_dir="=REPO_DIR=scripts/test-voltdb-all-scenario"
+output_dir="=REPO_DIR=/scripts/test-voltdb-all-scenario"
 
 # Every record is 1KB (10 fields of 100B)
 input_dim = [100000, 500000, 1000000, 3000000, 5000000]
