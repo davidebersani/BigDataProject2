@@ -1,0 +1,8 @@
+Passi da seguire per il corretto funzionamento di voltdb sul cloud:
+1) caricare attraverso comando scp i file:
+	voltdb-developer -x.x.x.tar.gz-> utilizzata da noi versione 9.3.1
+	BigDataProject2-master.zip
+2) connettersi alla macchina virtuale aws attraverso comando ssh
+3) unzip BigDataProject2-master.zip
+4) avviare file voltdb-cloud.sh dentro cartella cloud/voltdb/
+5) eseguire i passi già descritti nel file principale per l'avvio utilizzando l'opzione local
