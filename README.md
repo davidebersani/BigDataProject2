@@ -26,7 +26,7 @@ If you want to edit some benchmark or script we suggest to do this editing the f
 
 When you have finished, run ```init-project.sh``` again to generate the correct scripts. Remeber, run always scripts that are in **scripts** directory.
 
-## Usage (In progress...)
+## Usage
 You can try benchmarks on local databases or you can test your cloud solution.
 ### Try with local databaes
 First, start the databases you want to test. If you want, you can use the script ```start-local-services.sh``` contained in the script directory for start the databases and some useful services using Docker. 
