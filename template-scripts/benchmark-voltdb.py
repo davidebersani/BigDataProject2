@@ -14,7 +14,7 @@ operationcount=100000 # Number of operation per thread
 def delete_db(usage) :
     print("\n\n==> Removing db")
     if usage=="local-docker":
-        command = "docker exec -it node1 sqlcmd --query='truncate table store'
+        command = "docker exec -it node1 sqlcmd --query='truncate table store'"
         commons.executeBashCommand(command)
     elif usage=="local":
             command = "/home/ec2-user/voltdb/bin/sqlcmd --query='truncate table store'"
