@@ -199,23 +199,44 @@ def generateAndShowInputLatencyPlotsComparison(input_dim, throughputs, clients, 
 
             marker = itertools.cycle((',', '+', '.', 'o', '*', 's', 'x')) 
             for serie in reads:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ - " + serie.name) 
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ - " + name_db) 
             
             for serie in updates:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="UPDATE - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="UPDATE - " + name_db)  
                 
             for serie in scans:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="SCAN - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="SCAN - " + name_db)  
+
             for serie in rmw:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ-MODIFY-WRITE - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ-MODIFY-WRITE - " + name_db)  
             
             # naming the x axis 
             plt.xlabel('Input dimension') 
@@ -281,24 +302,45 @@ def generateAndShowThroughputLatencyPlotsComparison(input_dim, throughputs, clie
             marker = itertools.cycle((',', '+', '.', 'o', '*', 's', 'x')) 
 
             for serie in reads:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
+
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ - " + serie.name) 
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ - " + name_db) 
             
             for serie in updates:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="UPDATE - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="UPDATE - " + name_db)  
             
             for serie in scans:
+                if ("postgres" in serie.name):
+                    name_db="Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="SCAN - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="SCAN - " + name_db)  
 
             for serie in rmw:
+                if ("postgres" in serie.name):
+                    name_db = "Postgres"
+                elif ("mongo" in serie.name):
+                    name_db = "Mongodb"
+                else: name_db = "Voltdb"
                 if(len(serie.x)>0):
                     plt.plot(serie.x, serie.y, linewidth = 1, 
-                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ-MODIFY-WRITE - " + serie.name)  
+                            marker=next(marker), markerfacecolor='blue', markersize=5, label="READ-MODIFY-WRITE - " + name_db)  
                             
             # naming the x axis 
             plt.xlabel('Throughput') 
