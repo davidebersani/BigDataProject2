@@ -59,4 +59,3 @@ for num_clients in clients:
         
         delete_db(sys.argv[1])
 
-# PROSSIMI PASSI: AGGIUNGERE ITERAZIONE SUI CLIENT.

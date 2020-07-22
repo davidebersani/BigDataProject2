@@ -1,4 +1,4 @@
-Mongodb in cloud.
+Configuration used to run MongoDB in cloud.
 
 We tried Mongodb in cloud using an ec2 instance (m5.xlarge), AMI: Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type.
 Version: Mongodb 4.2

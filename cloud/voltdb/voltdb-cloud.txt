@@ -1,8 +1,11 @@
-Passi da seguire per il corretto funzionamento di voltdb sul cloud:
-1) caricare attraverso comando scp i file:
-	voltdb-developer -x.x.x.tar.gz-> utilizzata da noi versione 9.3.1
-	BigDataProject2-master.zip
-2) connettersi alla macchina virtuale aws attraverso comando ssh
-3) unzip BigDataProject2-master.zip
-4) avviare file voltdb-cloud.sh dentro cartella cloud/voltdb/
-5) eseguire i passi già descritti nel file principale per l'avvio utilizzando l'opzione local
+Configuration and istructions used to run VoltDB in cloud.
+We tried VoltDB in cloud using an ec2 instance (m5.xlarge), AMI: Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type.
+
+1) Load on the ec2 instance the files:
+	voltdb-developer-x.x.x.tar.gz-> we used version 9.3.1
+	BigDataProject2-master.zip -> or download it using curl or wget from GitHub.
+
+2) Connect to the ec2 instance through ssh.
+3) Unzip BigDataProject2-master.zip
+4) Execute voltdb-cloud.sh script, inside cloud/voltdb directory.
+5) Connect to the second ec2 instance, edit the benchmarks using the correct IP or dns name and start the benchmarks.

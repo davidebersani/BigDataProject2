@@ -1,3 +1,5 @@
+Configuration used to run PostgreSQL in cloud.
+
 PostgreSQL in cloud
 Version: PostgreSQL 11.6-R1
 Instance: m5.xlarge - Dev configuration
